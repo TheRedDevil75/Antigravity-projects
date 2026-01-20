@@ -147,7 +147,11 @@
                         document.getElementById('locations').value = data.locations || '';
                         document.getElementById('email_address').value = data.email_address || '';
                         document.getElementById('email_enabled').checked = data.email_enabled;
-                        // SMTP fields would be populated here in a real app, careful with passwords
+
+                        document.getElementById('smtp_server').value = data.smtp_server || 'smtp.gmail.com';
+                        document.getElementById('smtp_port').value = data.smtp_port || '587';
+                        document.getElementById('smtp_user').value = data.smtp_user || '';
+                        document.getElementById('smtp_password').value = data.smtp_password || '';
                     }
                 });
 

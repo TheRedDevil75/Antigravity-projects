@@ -29,7 +29,21 @@ def get_jobs():
 def manage_criteria():
     if request.method == 'POST':
         data = request.json
-        # TODO: Update criteria logic
+        criteria = Criteria.query.first()
+        if not criteria:
+            criteria = Criteria()
+            db_session.add(criteria)
+        
+        criteria.keywords = data.get('keywords')
+        criteria.locations = data.get('locations')
+        criteria.email_enabled = data.get('email_enabled', False)
+        criteria.email_address = data.get('email_address')
+        criteria.smtp_server = data.get('smtp_server')
+        criteria.smtp_port = int(data.get('smtp_port', 587))
+        criteria.smtp_user = data.get('smtp_user')
+        criteria.smtp_password = data.get('smtp_password')
+        
+        db_session.commit()
         return jsonify({"status": "success"})
     
     criteria = Criteria.query.first()
