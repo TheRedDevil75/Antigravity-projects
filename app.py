@@ -35,6 +35,21 @@ def manage_criteria():
     criteria = Criteria.query.first()
     return jsonify(criteria.to_dict() if criteria else {})
 
+@app.route('/api/scrape', methods=['POST'])
+def run_scrape():
+    """Manually trigger a scrape"""
+    from scrapers.manager import ScraperManager
+    try:
+        manager = ScraperManager()
+        new_jobs = manager.run_all()
+        return jsonify({
+            "status": "success",
+            "new_jobs": len(new_jobs),
+            "message": f"Found {len(new_jobs)} new jobs"
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
 if __name__ == '__main__':
     init_db()
     init_scheduler(app)

@@ -5,7 +5,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (refreshBtn) {
         refreshBtn.addEventListener('click', loadJobs);
     }
+
+    const scrapeBtn = document.getElementById('scrape-btn');
+    if (scrapeBtn) {
+        scrapeBtn.addEventListener('click', runScrape);
+    }
 });
+
+function runScrape() {
+    const btn = document.getElementById('scrape-btn');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span class="animate-spin inline-block">⏳</span> Scraping...';
+    btn.disabled = true;
+
+    fetch('/api/scrape', { method: 'POST' })
+        .then(r => r.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert(`${data.message}`);
+                loadJobs();
+            } else {
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(err => alert('Scrape failed: ' + err))
+        .finally(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        });
+}
 
 function loadJobs() {
     const grid = document.getElementById('job-grid');
