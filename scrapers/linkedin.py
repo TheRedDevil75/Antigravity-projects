@@ -26,10 +26,12 @@ class LinkedInScraper(BaseScraper):
                 job_cards = page.locator('ul.jobs-search__results-list li').all()
                 print(f"Found {len(job_cards)} jobs on LinkedIn")
 
-                for card in job_cards[:10]:
+                for i, card in enumerate(job_cards[:10]):
                     try:
+                        print(f"Processing LinkedIn Card {i+1}...")
                         title_el = card.locator('h3.base-search-card__title')
                         if not title_el.is_visible():
+                            print(f"Card {i+1}: Title not visible, skipping.")
                             continue
                             
                         title = title_el.inner_text().strip()

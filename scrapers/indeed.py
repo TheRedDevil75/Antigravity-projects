@@ -22,10 +22,12 @@ class IndeedScraper(BaseScraper):
                 job_cards = page.locator('.job_seen_beacon').all()
                 print(f"Found {len(job_cards)} jobs on Indeed")
 
-                for card in job_cards[:10]: # Limit to 10 for now
+                for i, card in enumerate(job_cards[:10]): # Limit to 10 for now
                     try:
+                        print(f"Processing Indeed Card {i+1}...")
                         title_el = card.locator('h2.jobTitle span').first
                         if not title_el.is_visible():
+                            print(f"Card {i+1}: Title not visible, skipping.")
                             continue
                             
                         title = title_el.inner_text()
