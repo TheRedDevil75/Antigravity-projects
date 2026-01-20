@@ -2,7 +2,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('sqlite:///jobs.db')
+import os
+
+# Ensure data directory exists
+os.makedirs('data', exist_ok=True)
+
+engine = create_engine('sqlite:///data/jobs.db')
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))

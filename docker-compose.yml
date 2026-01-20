@@ -7,6 +7,5 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./jobs.db:/app/jobs.db
-      - ./.env:/app/.env
+      - ./data:/app/data
     restart: unless-stopped
