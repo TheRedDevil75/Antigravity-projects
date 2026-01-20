@@ -31,6 +31,7 @@ class IndeedScraper(BaseScraper):
                         title = title_el.inner_text()
                         company = card.locator('[data-testid="company-name"]').inner_text()
                         location = card.locator('[data-testid="text-location"]').inner_text()
+                        print(f"Indeed Scraped: Title='{title}', Company='{company}'")
                         link = card.locator('h2.jobTitle a').get_attribute('href')
                         
                         if link:

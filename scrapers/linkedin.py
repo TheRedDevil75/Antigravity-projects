@@ -35,6 +35,7 @@ class LinkedInScraper(BaseScraper):
                         title = title_el.inner_text().strip()
                         company = card.locator('h4.base-search-card__subtitle').inner_text().strip()
                         location = card.locator('span.job-search-card__location').inner_text().strip()
+                        print(f"LinkedIn Scraped: Title='{title}', Company='{company}'")
                         link = card.locator('a.base-card__full-link').get_attribute('href')
                         
                         if link:
