@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Job Scraper Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+    <div class="min-h-screen flex flex-col">
+        <!-- Navigation -->
+        <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <h1
+                            class="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 text-transparent bg-clip-text">
+                            JobHunter AI
+                        </h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="/"
+                            class="text-slate-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                        <a href="/settings"
+                            class="text-slate-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium bg-slate-100">Settings</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-grow max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="px-6 py-4 border-b border-slate-200 bg-slate-50">
+                    <h2 class="text-lg font-medium text-slate-900">Configuration</h2>
+                    <p class="text-sm text-slate-500">Manage what jobs you want to see and how you want to be notified.
+                    </p>
+                </div>
+
+                <form id="settings-form" class="p-6 space-y-6">
+                    <!-- Search Criteria -->
+                    <div>
+                        <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-4">Search Criteria
+                        </h3>
+                        <div class="grid grid-cols-1 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700">Keywords</label>
+                                <input type="text" name="keywords" id="keywords"
+                                    placeholder="e.g. Software Engineer, Python"
+                                    class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border">
+                                <p class="mt-1 text-xs text-slate-500">Separate multiple keywords with commas.</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700">Location</label>
+                                <input type="text" name="locations" id="locations"
+                                    placeholder="e.g. Remote, New York, NY"
+                                    class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-200 pt-6"></div>
+
+                    <!-- Email Settings -->
+                    <div>
+                        <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-4">Email
+                            Notifications</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex h-5 items-center">
+                                    <input id="email_enabled" name="email_enabled" type="checkbox"
+                                        class="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="email_enabled" class="font-medium text-slate-700">Enable Weekly
+                                        Email</label>
+                                    <p class="text-slate-500">Receive a summary every Tuesday at 9 AM.</p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700">Recipient Email</label>
+                                    <input type="email" name="email_address" id="email_address"
+                                        class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border">
+                                </div>
+
+                                <div class="bg-yellow-50 p-4 rounded-md">
+                                    <h4 class="text-sm font-medium text-yellow-800 mb-2">SMTP Server Config (Advanced)
+                                    </h4>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-xs font-medium text-slate-700">Server</label>
+                                            <input type="text" name="smtp_server" id="smtp_server"
+                                                value="smtp.gmail.com"
+                                                class="mt-1 block w-full rounded-md border-slate-300 sm:text-xs p-1 border">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-medium text-slate-700">Port</label>
+                                            <input type="text" name="smtp_port" id="smtp_port" value="587"
+                                                class="mt-1 block w-full rounded-md border-slate-300 sm:text-xs p-1 border">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-medium text-slate-700">User</label>
+                                            <input type="text" name="smtp_user" id="smtp_user"
+                                                class="mt-1 block w-full rounded-md border-slate-300 sm:text-xs p-1 border">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-medium text-slate-700">Password</label>
+                                            <input type="password" name="smtp_password" id="smtp_password"
+                                                class="mt-1 block w-full rounded-md border-slate-300 sm:text-xs p-1 border">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end pt-4">
+                        <button type="submit"
+                            class="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+    <script>
+        // Load settings on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/api/criteria')
+                .then(r => r.json())
+                .then(data => {
+                    if (data) {
+                        document.getElementById('keywords').value = data.keywords || '';
+                        document.getElementById('locations').value = data.locations || '';
+                        document.getElementById('email_address').value = data.email_address || '';
+                        document.getElementById('email_enabled').checked = data.email_enabled;
+                        // SMTP fields would be populated here in a real app, careful with passwords
+                    }
+                });
+
+            document.getElementById('settings-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const data = Object.fromEntries(formData.entries());
+                data.email_enabled = document.getElementById('email_enabled').checked;
+
+                fetch('/api/criteria', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                })
+                    .then(r => r.json())
+                    .then(res => {
+                        alert('Settings saved!');
+                    });
+            });
+        });
+    </script>
+</body>
+
+</html>

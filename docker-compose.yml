@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  job-scraper:
+    build: .
+    container_name: job-scraper
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./jobs.db:/app/jobs.db
+      - ./.env:/app/.env
+    restart: unless-stopped
